@@ -30,7 +30,8 @@ A cold read (the cache has lapsed, so the whole thread gets written again) costs
 | 🔴 900k | $14.40 | $7.20 | $0.18 | a cocktail |
 | 🔴 1M | $16.00 | $8.00 | $0.20 | a movie ticket |
 
-That's the cost of a sandwich. Every time.
+Those costs are for a single cold-cache read. Just imagine how many times this happens in a day. Or better yet,
+don't... just use the plugin!
 
 keep-warm sends one tiny "ok" after 50 quiet minutes. Claude says ok. The cache stays warm. A few cents, not a few
 dollars. That turn is a warm read, and it restarts the hour.
