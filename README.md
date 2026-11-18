@@ -1,6 +1,7 @@
 # keep-warm 🔥
 
-A Claude Code plugin that saves 💰 by keeping your threads warm while you step away.
+A Claude Code plugin that saves 💰 by keeping your threads warm while you step away. I'm saving $100+ a
+week, and you can too.
 
 ![The keep-warm bar above the input box](images/bar.png)
 
