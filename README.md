@@ -1,7 +1,6 @@
 # keep-warm 🔥
 
-A Claude Code plugin that keeps a thread's prompt cache warm while you step away, and shows you how big the
-thread is getting.
+A Claude Code plugin that saves 💰 by keeping your threads warm while you step away.
 
 ![The keep-warm bar above the input box](images/bar.png)
 
