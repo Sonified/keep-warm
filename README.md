@@ -1,7 +1,5 @@
 # keep-warm 🔥
 
-***Winter is coming ❄️⛄️ let's keep warm 🔥***
-
 A Claude Code plugin that keeps a thread's prompt cache warm while you step away, and shows you how big the
 thread is getting.
 
@@ -83,3 +81,7 @@ In Claude Code:
 
 Then `/reload-plugins`. Needs `bash` and `python3`. Built and used on macOS in the VS Code extension. Prices are
 list prices per million tokens; your plan may differ. State lives in `~/.claude/keep-warm/`.
+
+---
+
+***Winter is coming ❄️⛄️ let's keep warm 🔥***
