@@ -84,4 +84,4 @@ list prices per million tokens; your plan may differ. State lives in `~/.claude/
 
 ---
 
-***Winter is coming ❄️⛄️ let's keep warm 🔥***
+***Winter is coming ❄️⛄️ keep warm 🔥***
