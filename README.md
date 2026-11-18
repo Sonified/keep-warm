@@ -1,5 +1,7 @@
 # keep-warm 🔥
 
+***Winter is coming ❄️⛄️ let's keep warm 🔥***
+
 A Claude Code plugin that keeps a thread's prompt cache warm while you step away, and shows you how big the
 thread is getting.
 
