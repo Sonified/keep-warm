@@ -98,7 +98,8 @@ list prices per million tokens; your plan may differ. State lives in `~/.claude/
    during tool-heavy work.
 2. **One cold read costs the same as 80 warm ones** on Fable (40 on Opus), at any thread size.
 3. **Compacting costs about the same at 200k as at 600k**, as long as the cache is warm. Compact before you step
-   away, never after a lapse.
+   away, not after you come back. Once the cache has gone cold (an hour with no messages), the compact itself has
+   to pay to rewrite the whole thread before it can shrink it.
 4. **Each model has its own cache.** Switching models mid-thread rewrites everything. For lighter work, lower the
    effort instead. If you do switch, compact first.
 
