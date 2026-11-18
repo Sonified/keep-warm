@@ -8,13 +8,11 @@ week, and you can too.
 ## Why: the cache goes cold
 
 Step away for lunch and Claude's cache goes cold. Come back and you pay to remind it of everything, at 80× the
-price on Fable.
+price on Fable. That's $8 just to say "hi."
 
 Claude caches your conversation for one hour. Come back within the hour and your next message re-reads the cache,
 which is cheap. Come back later and the whole thread is written into the cache again, at 80 times the price on
 Fable 5.2 (40 times on Opus 5.5). The bigger the thread, the more a cold return costs.
-
-Come back after lunch to a 500k thread and type "hi." That hi just cost you $8.
 
 A cold read (the cache has lapsed, so the whole thread gets written again) costs $16 per million tokens on Fable
 5.2 and $8 per million on Opus 5.5:
