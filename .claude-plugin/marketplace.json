@@ -1,0 +1,17 @@
+{
+  "name": "keep-warm",
+  "owner": { "name": "Sonified" },
+  "description": "Keep Claude Code threads cheap to come back to",
+  "plugins": [
+    {
+      "name": "keep-warm",
+      "source": "./keep-warm",
+      "description": "Type \"warm\" and the thread's prompt cache stays alive while you're away: one tiny ping after 50 idle minutes, off after 24 hours without a message. Shows the thread's size above the input box."
+    },
+    {
+      "name": "tokens",
+      "source": "./tokens",
+      "description": "Type \"tokens\" for a one-line report of the thread's size and what it costs, without spending a turn."
+    }
+  ]
+}

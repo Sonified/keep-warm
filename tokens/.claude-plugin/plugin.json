@@ -1,0 +1,5 @@
+{
+  "name": "tokens",
+  "version": "1.0.0",
+  "description": "Type the single word \"tokens\" and the thread reports how many tokens it is holding and what that costs per request. Answered by a hook, so the message never reaches the model and no turn is spent."
+}

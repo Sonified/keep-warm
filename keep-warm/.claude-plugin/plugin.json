@@ -1,0 +1,5 @@
+{
+  "name": "keep-warm",
+  "version": "1.0.0",
+  "description": "Keep a conversation's prompt cache alive while the user is away. Type \"warm\" to switch it on: after 50 idle minutes it sends one one-word turn (a cheap cache read that restarts the one-hour cache timer). Switches itself off after 24 hours without a message from you, or type \"cold\". Shows the thread's size above the input box."
+}

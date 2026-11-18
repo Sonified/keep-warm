@@ -1,0 +1,8 @@
+[
+  {
+    "name": "keep-warm-idle",
+    "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/monitor.sh\"",
+    "description": "keep-warm: one do-nothing turn after 50 idle minutes, to keep the prompt cache alive",
+    "when": "on-skill-invoke:on"
+  }
+]
