@@ -91,9 +91,7 @@ In Claude Code:
 Then `/reload-plugins`. Needs `bash` and `python3`. Built and used on macOS in the VS Code extension. Prices are
 list prices per million tokens; your plan may differ. State lives in `~/.claude/keep-warm/`.
 
-## Best practices
-
-What I learned building this:
+## What I learned building this
 
 1. **Every tool call re-reads the whole thread.** Each one is its own request, so a message where Claude runs 10
    commands pays for the thread 10 times (calls sent together in one step count as one). Thread size matters most
