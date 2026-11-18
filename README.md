@@ -93,15 +93,15 @@ list prices per million tokens; your plan may differ. State lives in `~/.claude/
 
 ## What I learned building this
 
-1. **Every tool call re-reads the whole thread.** Each one is its own request, so a message where Claude runs 10
+1. **Each model has its own cache.** Switching models mid-thread rewrites everything. For lighter work, lower the
+   effort instead. If you do switch, compact first.
+2. **Every tool call re-reads the whole thread.** Each one is its own request, so a message where Claude runs 10
    commands pays for the thread 10 times (calls sent together in one step count as one). Thread size matters most
    during tool-heavy work.
-2. **One cold read costs the same as 80 warm ones** on Fable (40 on Opus), at any thread size.
-3. **Compacting costs about the same at 200k as at 600k**, as long as the cache is warm. Compact before you step
+3. **One cold read costs the same as 80 warm ones** on Fable (40 on Opus), at any thread size.
+4. **Compacting costs about the same at 200k as at 600k**, as long as the cache is warm. Compact before you step
    away, not after you come back. Once the cache has gone cold (an hour with no messages), the compact itself has
    to pay to rewrite the whole thread before it can shrink it.
-4. **Each model has its own cache.** Switching models mid-thread rewrites everything. For lighter work, lower the
-   effort instead. If you do switch, compact first.
 
 ---
 
