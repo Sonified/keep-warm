@@ -4,11 +4,16 @@ A Claude Code plugin that saves 💰 by keeping your threads warm while you step
 
 ![The keep-warm bar above the input box](images/bar.png)
 
-## Why
+## Why: the cache goes cold
+
+Step away for lunch and Claude's cache goes cold. Come back and you pay to remind it of everything, at 80× the
+price on Fable.
 
 Claude caches your conversation for one hour. Come back within the hour and your next message re-reads the cache,
 which is cheap. Come back later and the whole thread is written into the cache again, at 80 times the price on
 Fable 5.2 (40 times on Opus 5.5). The bigger the thread, the more a cold return costs.
+
+Come back after lunch to a 500k thread and type "hi." That hi just cost you $8.
 
 A cold read (the cache has lapsed, so the whole thread gets written again) costs $16 per million tokens on Fable
 5.2 and $8 per million on Opus 5.5:
@@ -25,15 +30,20 @@ A cold read (the cache has lapsed, so the whole thread gets written again) costs
 | 🔴 900k | $14.40 | $7.20 | $0.18 |
 | 🔴 1M | $16.00 | $8.00 | $0.20 |
 
-keep-warm sends one tiny "ok" turn after 50 idle minutes. That turn is a warm read, and it restarts the hour.
+That's the cost of a sandwich. Every time.
+
+keep-warm sends one tiny "ok" after 50 quiet minutes. Claude says ok. The cache stays warm. A few cents, not a few
+dollars. That turn is a warm read, and it restarts the hour.
 
 > You work in Fable 5.2, walk away for an hour, and come back with a 400k context. A few hours later you do the
 > same at 500k, then again at 600k. Then you switch from Fable to Opus without compacting. That costs $28.80. With
 > keep-warm, and compacting before switching from Fable to Opus, it costs $2.70.
 
+$26 back in your pocket. Same work.
+
 ## What you type
 
-None of these reach Claude, so none of them cost a turn.
+None of these reach Claude, so they're free. Talk to the plugin all you want.
 
 | Type | What happens |
 | --- | --- |
@@ -47,7 +57,7 @@ None of these reach Claude, so none of them cost a turn.
 ## The bar
 
 - **`active 🔥 (🟢 112k)`**: keep-warm is on. The number is the thread's size in tokens.
-- **`back burner (🟢 82k)`**: keep-warm is off, which is how every new thread starts. The size still shows.
+- **`back burner (🟢 82k)`**: keep-warm is off, which is how every new thread starts. Simmering, not burning money. The size still shows.
 
 The dot shows when it's worth compacting:
 
@@ -56,7 +66,7 @@ The dot shows when it's worth compacting:
 | 🟢 | up to 300k | fine |
 | 🟡 | 300k to 400k | consider a `/compact` at a natural break |
 | 🟠 | 400k to 500k | a compact pays for itself within about 20 requests |
-| 🔴 | over 500k | compact now |
+| 🔴 | over 500k | compact now. Seriously. |
 
 ## How it behaves
 
