@@ -18,15 +18,15 @@ Come back after lunch to a 500k thread and type "hi." That hi just cost you $8.
 A cold read (the cache has lapsed, so the whole thread gets written again) costs $16 per million tokens on Fable
 5.2 and $8 per million on Opus 5.5:
 
-| Context | Fable 5.2 cold | Opus 5.5 cold | Warm read (either) | Keep-warm buys you |
+| Context | Fable 5.2 cold | Opus 5.5 cold | Warm read (either) | Keep-warm w/ Fable buys you |
 | --- | --- | --- | --- | --- |
 | 🟢 200k | $3.20 | $1.60 | $0.04 | a coffee |
-| 🟢 300k | $4.80 | $2.40 | $0.06 | a fancy coffee |
-| 🟡 400k | $6.40 | $3.20 | $0.08 | a burrito |
+| 🟢 300k | $4.80 | $2.40 | $0.06 | a croissant |
+| 🟡 400k | $6.40 | $3.20 | $0.08 | a latte |
 | 🟠 500k | $8.00 | $4.00 | $0.10 | a sandwich |
-| 🔴 600k | $9.60 | $4.80 | $0.12 | a six-pack |
-| 🔴 700k | $11.20 | $5.60 | $0.14 | a pizza |
-| 🔴 800k | $12.80 | $6.40 | $0.16 | a ramen bowl |
+| 🔴 600k | $9.60 | $4.80 | $0.12 | a smoothie |
+| 🔴 700k | $11.20 | $5.60 | $0.14 | a burrito |
+| 🔴 800k | $12.80 | $6.40 | $0.16 | a burger |
 | 🔴 900k | $14.40 | $7.20 | $0.18 | a cocktail |
 | 🔴 1M | $16.00 | $8.00 | $0.20 | a movie ticket |
 
