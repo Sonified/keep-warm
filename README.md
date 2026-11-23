@@ -1,3 +1,5 @@
+![keep-warm: a Claude Code plugin that saves you money](images/social-preview.png)
+
 # keep-warm 🔥
 
 A Claude Code plugin that saves you money by keeping your threads warm while you step away.
