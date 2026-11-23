@@ -39,7 +39,8 @@ What one prompt costs after an hour away, on Fable 5.2:
 | 🔴 1M | $16.00 | $0.20 | **$15.80** | a movie ticket |
 
 Those costs are for a single cold-cache read. Imagine how many times this happens in a day. For example: let's say
-your context window is over 600k and you walk away 9 times. You just threw away enough $$ to buy GTA VI.
+your context window is over 600k and you walk away 9 times in one day. You just threw away enough $$ to buy GTA
+VI.
 
 ## What you type
 
