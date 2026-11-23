@@ -34,10 +34,11 @@ stop_task_watcher() {
   [ "$p" -gt 1 ] && kill "$p" 2>/dev/null
   rm -f "$mark" "$pf"
 }
-# Write on.<session>: line 1 the time it was switched on, line 2 the session's transcript file.
+find_transcript() { ls "$HOME"/.claude/projects/*/"$raw".jsonl 2>/dev/null | head -n 1; }
+# Write on.<session>: line 1 the time it was switched on, line 2 the session's transcript file. A thread with no
+# message yet has no transcript file: line 2 is then left empty, and the next tick or peek fills it in.
 arm() {
-  transcript="$(ls "$HOME"/.claude/projects/*/"$raw".jsonl 2>/dev/null | head -n 1)"
-  [ -n "$transcript" ] || { echo "keep-warm: no transcript file found for session $raw; not switched on"; return 1; }
+  transcript="$(find_transcript)"
   printf '%s\n%s\n' "$(date +%s)" "$transcript" > "$on"
   rm -f "$STATE/last_ping.$sid"
   find "$STATE" -name 'alive.*' -mmin +1440 -delete 2>/dev/null || true     # sessions that ended long ago
@@ -73,6 +74,10 @@ case "${1:-status}" in
     [ -f "$on" ] || { echo "off"; exit 0; }
     armed="$(num "$(sed -n 1p "$on")")"
     transcript="$(sed -n 2p "$on")"
+    if [ ! -f "$transcript" ]; then            # switched on before the thread's first message: look again
+      transcript="$(find_transcript)"
+      [ -n "$transcript" ] && printf '%s\n%s\n' "$armed" "$transcript" > "$on"
+    fi
     lu="$(num "$(cat "$STATE/last_user.$sid" 2>/dev/null)")"
     [ "$lu" -ge "$armed" ] || lu="$armed"
     if [ $((now - lu)) -ge "$MAX" ]; then
@@ -103,8 +108,9 @@ case "${1:-status}" in
     ;;
   size)
     # The thread's size in tokens, on or off (the back-burner line). Run after a turn, not on every look.
-    if [ -f "$on" ]; then transcript="$(sed -n 2p "$on")"
-    else transcript="$(ls "$HOME"/.claude/projects/*/"$raw".jsonl 2>/dev/null | head -n 1)"; fi
+    transcript=""
+    [ -f "$on" ] && transcript="$(sed -n 2p "$on")"
+    [ -f "$transcript" ] || transcript="$(find_transcript)"
     [ -n "$transcript" ] || { echo 0; exit 0; }
     read -r _ tok <<< "$(python3 "$(dirname "$0")/last_request.py" "$transcript" 2>/dev/null)"
     num "${tok:-}"
