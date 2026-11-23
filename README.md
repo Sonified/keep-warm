@@ -122,6 +122,23 @@ list prices per million tokens; your plan may differ. State lives in `~/.claude/
    away, not after you come back. Once the cache has gone cold (an hour with no messages), the compact itself has
    to pay to rewrite the whole thread before it can shrink it.
 
+## Settings
+
+To change the timings for every thread, create `~/.claude/keep-warm/config` with one setting per line, in seconds:
+
+```
+IDLE=3000
+MAX=86400
+```
+
+| Setting | Default | What it controls |
+| --- | --- | --- |
+| `IDLE` | 3000 (50 minutes) | how long a thread sits quiet before a ping |
+| `MAX` | 86400 (24 hours) | how long without a message from you before keep-warm switches itself off |
+
+Changes take effect within 30 seconds. Keep `IDLE` under 3600: the cache lasts an hour, so a later ping arrives
+after it has already gone cold.
+
 ---
 
 ***Winter is coming ❄️⛄️ keep warm 🔥***
