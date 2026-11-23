@@ -72,9 +72,9 @@ The dot shows when it's worth compacting:
 
 - It pings only after 50 minutes with no activity, never while you're working.
 - It switches itself off after 24 hours without a message from you.
-- `warm list` counts money honestly. Each ping is subtracted at what it actually cost. Each time you come back
-  after more than an hour to a cache that a ping kept warm, the rewrite you skipped is added. A thread you never
-  come back to shows as a loss.
+- `warm list` keeps track of savings per thread and total savings. Each ping is subtracted at what it actually
+  cost. Each time you come back after more than an hour to a cache that a ping kept warm, the rewrite you skipped
+  is added. A thread you never come back to shows as a loss.
 - Every model has its own cache, so `/compact` before switching models, and before stepping away from a big
   thread.
 
