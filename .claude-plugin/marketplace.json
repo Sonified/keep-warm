@@ -1,6 +1,8 @@
 {
   "name": "keep-warm",
-  "owner": { "name": "Sonified" },
+  "owner": {
+    "name": "Sonified"
+  },
   "description": "Keep Claude Code threads cheap to come back to",
   "plugins": [
     {
@@ -12,6 +14,11 @@
       "name": "tokens",
       "source": "./tokens",
       "description": "Type \"tokens\" for a one-line report of the thread's size and what it costs, without spending a turn."
+    },
+    {
+      "name": "com",
+      "source": "./com",
+      "description": "Type \"com\" and it runs the real /compact, without spending a turn. \"com 2 4\" compacts threads 2 and 4 from the last \"warm list\", in their own windows."
     }
   ]
 }

@@ -213,7 +213,7 @@ def do_list(caller):
         fh.write(''.join(th[0] + '\n' for th in threads))
     lines = [row(i, *th, caller) for i, th in enumerate(threads, 1)]
     return '\n'.join([f'warm 🔥 ({len(threads)}):'] + lines +
-                     [f'"cool 2" or "cool 2 4" takes those off keep-warm{SEP}Total saved: {money(sum(th[5] for th in threads))}'])
+                     [f'"cool 2 4" takes those off keep-warm{SEP}"com 2 4" compacts them{SEP}Total saved: {money(sum(th[5] for th in threads))}'])
 
 
 def do_cool(caller, numbers):
