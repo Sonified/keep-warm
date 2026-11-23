@@ -3,9 +3,9 @@
 ## How it works
 
 Type `warm` in any thread to keep the cache warm when you step away. keep-warm sends one tiny "ok" after 50 quiet
-minutes. Claude replies "ok". The cache stays warm. It costs a few cents instead of a few dollars. That turn is a
-warm read, and it restarts the hour. Type `warm list` to see all your currently active threads, along with their
-token count.
+minutes. Claude replies "ok" and the cache stays warm. It costs a few cents instead of a few dollars. That turn is
+a warm read, and it restarts the hour. Type `warm list` to see all your currently active threads, along with
+their token count.
 
 ![The keep-warm bar above the input box](images/bar.png)
 
