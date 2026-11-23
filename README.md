@@ -14,8 +14,8 @@ your currently active threads, along with their token count.
 
 ## Why: the cache goes cold
 
-Step away for lunch and Claude's cache goes cold. Come back and you pay to remind it of everything, at 80× the
-price on Fable. That's $8 just to say "hi."
+Step away for lunch and Claude's cache goes cold after an hour. Come back and you pay to remind it of everything,
+at 80× the price on Fable. That's $8 just to say "hi."
 
 Claude caches your conversation for one hour. Come back within the hour and your next message re-reads the cache,
 which is cheap. Come back later and the whole thread is written into the cache again, at 80 times the price on
