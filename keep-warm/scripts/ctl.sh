@@ -34,10 +34,13 @@ stop_task_watcher() {
   [ "$p" -gt 1 ] && kill "$p" 2>/dev/null
   rm -f "$mark" "$pf"
 }
+# Add this thread's savings so far to the all-time file (warmlist.py bank), before its on file goes or is rewritten.
+bank() { [ -f "$on" ] && python3 "$(dirname "$0")/warmlist.py" bank "$sid" >/dev/null 2>&1; return 0; }
 find_transcript() { ls "$HOME"/.claude/projects/*/"$raw".jsonl 2>/dev/null | head -n 1; }
 # Write on.<session>: line 1 the time it was switched on, line 2 the session's transcript file. A thread with no
 # message yet has no transcript file: line 2 is then left empty, and the next tick or peek fills it in.
 arm() {
+  bank                                         # "warm" on a thread already warm: keep what the stretch so far came to
   transcript="$(find_transcript)"
   printf '%s\n%s\n' "$(date +%s)" "$transcript" > "$on"
   rm -f "$STATE/last_ping.$sid"
@@ -63,6 +66,7 @@ case "${1:-status}" in
     echo "on"
     ;;
   off)
+    bank
     rm -f "$on"
     stop_task_watcher
     log "switched off for $sid"
@@ -81,6 +85,7 @@ case "${1:-status}" in
     lu="$(num "$(cat "$STATE/last_user.$sid" 2>/dev/null)")"
     [ "$lu" -ge "$armed" ] || lu="$armed"
     if [ $((now - lu)) -ge "$MAX" ]; then
+      bank
       rm -f "$on"
       log "no message from the user for $(( (now - lu) / 3600 )) h: keep-warm switched off for $sid"
       echo "expired"; exit 0

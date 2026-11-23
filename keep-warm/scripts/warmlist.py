@@ -3,6 +3,8 @@
 
     warmlist.py list <caller-session>             number every thread keep-warm is on for, one line each
     warmlist.py cool <caller-session> <n> [n...]   switch keep-warm off for those numbers from the last list
+    warmlist.py bank <session>                     add that thread's savings so far to the all-time file (ctl.sh runs
+                                                   this just before it switches a thread off or on again)
 
 "list" writes the numbering to ~/.claude/keep-warm/list.last (one session id per line), so "cool 2" means the
 thread shown as 2 in the last list, even if another thread has expired since. Switching off is removing that
@@ -14,6 +16,7 @@ import datetime as dt, json, os, re, sys, time
 STATE = os.path.expanduser('~/.claude/keep-warm')
 SEP = ' │ '   # between fields: the panel collapses padding, so no columns
 LAST = os.path.join(STATE, 'list.last')
+ALLTIME = os.path.join(STATE, 'alltime')   # one line per finished stretch of keep-warm: time, session, dollars
 
 
 def setting(name, default):
@@ -195,6 +198,36 @@ def row(i, sid, transcript, when, tokens, model, net, caller):
     return f'{i}. ' + SEP.join(c for c in cells if c)
 
 
+def bank(sid):
+    """Adds what keep-warm came to in this thread since it was switched on (the number its row shows) to the
+    all-time file. Called just before the thread's on.<session> file is removed or written again, so each stretch
+    is counted once. A stretch that lost money is a negative line."""
+    try:
+        with open(os.path.join(STATE, 'on.' + sid)) as fh:
+            armed, transcript = (fh.read().split('\n') + ['', ''])[:2]
+        net = ledger(transcript, int(armed or 0))
+        if abs(net) >= 0.00005:
+            with open(ALLTIME, 'a') as fh:
+                fh.write(f'{int(time.time())} {sid} {net:.4f}\n')
+    except (OSError, ValueError):
+        pass
+
+
+def banked():
+    """The sum of the all-time file: every stretch of keep-warm that has ended."""
+    total = 0.0
+    try:
+        with open(ALLTIME) as fh:
+            for line in fh:
+                try:
+                    total += float(line.split()[2])
+                except (IndexError, ValueError):
+                    pass
+    except OSError:
+        pass
+    return total
+
+
 def do_list(caller):
     threads = []
     for armed, sid, t in warm_threads():
@@ -207,13 +240,14 @@ def do_list(caller):
         # ⏱️ the warm idle timer, the same clock ctl.sh ends keep-warm by: from switch-on or the last message
         threads.append((sid, t, max(armed, said), tokens, model, ledger(t, armed)))
     if not threads:
-        return 'keep-warm is not on for any thread'
+        return f'keep-warm is not on for any thread{SEP}All time: {money(banked())}'
     threads.sort(key=lambda th: -th[3])                         # most expensive first: each ping re-reads it all
     with open(LAST, 'w') as fh:
         fh.write(''.join(th[0] + '\n' for th in threads))
     lines = [row(i, *th, caller) for i, th in enumerate(threads, 1)]
+    now = sum(th[5] for th in threads)
     return '\n'.join([f'warm 🔥 ({len(threads)}):'] + lines +
-                     [f'"cool 2 4" takes those off keep-warm{SEP}Total saved: {money(sum(th[5] for th in threads))}'])
+                     [f'"cool 2 4" takes those off keep-warm{SEP}Total saved: {money(now)}{SEP}All time: {money(banked() + now)}'])
 
 
 def do_cool(caller, numbers):
@@ -232,6 +266,7 @@ def do_cool(caller, numbers):
         try:
             with open(on) as fh:
                 transcript = (fh.read().split('\n') + ['', ''])[1]
+            bank(sid)
             os.remove(on)
         except OSError:
             skipped.append(f'{n} (already off)')
@@ -247,9 +282,12 @@ def do_cool(caller, numbers):
 
 
 def main(argv):
-    if len(argv) < 3 or argv[1] not in ('list', 'cool'):
-        return 'usage: warmlist.py list|cool <caller-session> [n...]'
+    if len(argv) < 3 or argv[1] not in ('list', 'cool', 'bank'):
+        return 'usage: warmlist.py list|cool|bank <session> [n...]'
     caller = safe_id(argv[2])
+    if argv[1] == 'bank':
+        bank(caller)
+        return ''
     if argv[1] == 'list':
         return do_list(caller)
     return do_cool(caller, [int(n) for n in argv[3:] if n.isdigit()])

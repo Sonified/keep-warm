@@ -79,6 +79,7 @@ while :; do
   lu="$(num "$(cat "$STATE/last_user.$sid" 2>/dev/null)")"
   [ "$lu" -ge "$armed" ] || lu="$armed"
   if [ $((now - lu)) -ge "$MAX" ]; then
+    python3 "$(dirname "$0")/warmlist.py" bank "$sid" >/dev/null 2>&1 || true   # its savings go to the all-time file
     rm -f "$on"
     log "no message from the user for $(( (now - lu) / 3600 )) h: keep-warm switched off for $sid"
     if [ "$once" = 1 ]; then echo "keep-warm ended: $((MAX / 3600)) hours without a message from the user"; exit 3; fi
