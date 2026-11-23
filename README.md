@@ -79,16 +79,35 @@ The dot shows when it's worth compacting:
 
 ## Install
 
-In Claude Code:
+**The easy way: ask Claude.** Paste this into Claude Code:
+
+> Install the keep-warm plugins from https://github.com/Sonified/keep-warm
+
+**For the agent doing the install:** run these three commands in a shell.
+
+```
+claude plugin marketplace add Sonified/keep-warm
+claude plugin install keep-warm@keep-warm
+claude plugin install tokens@keep-warm
+```
+
+If `claude` is not on the PATH (a VS Code-only setup), use the copy inside the extension:
+`ls -d ~/.vscode/extensions/anthropic.claude-code-*/resources/native-binary/claude | sort -V | tail -1`
+
+Then tell the person to type `/reload-plugins` (or open a new Claude Code window) and then `warm`. The bar above
+the input box should read `active 🔥`. Do not type `warm` for them: only a message the person types switches it on.
+
+**By hand,** in Claude Code in a terminal:
 
 ```
 /plugin marketplace add Sonified/keep-warm
 /plugin install keep-warm@keep-warm
 /plugin install tokens@keep-warm
+/reload-plugins
 ```
 
-Then `/reload-plugins`. Needs `bash` and `python3`. Built and used on macOS in the VS Code extension. Prices are
-list prices per million tokens; your plan may differ. State lives in `~/.claude/keep-warm/`.
+Needs `bash` and `python3`. Built and used on macOS in the VS Code extension. Prices are list prices per million
+tokens; your plan may differ. State lives in `~/.claude/keep-warm/`.
 
 ## What I learned building this
 
