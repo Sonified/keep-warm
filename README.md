@@ -10,6 +10,8 @@ your currently active threads, along with their token count.
 
 ![The keep-warm bar above the input box](images/bar.png)
 
+![The keep-warm status below the input box in the terminal](images/bar-terminal.png)
+
 ## Why: the cache goes cold
 
 Step away for lunch and Claude's cache goes cold. Come back and you pay to remind it of everything, at 80× the
@@ -109,8 +111,8 @@ the input box should read `active 🔥`. Do not type `warm` for them: only a mes
 /reload-plugins
 ```
 
-Needs `bash` and `python3`. Built and used on macOS in the VS Code extension. Prices are list prices per million
-tokens; your plan may differ. State lives in `~/.claude/keep-warm/`.
+Needs `bash` and `python3`. Built on macOS, and tested in the VS Code extension and in the terminal. Prices are
+list prices per million tokens; your plan may differ. State lives in `~/.claude/keep-warm/`.
 
 ## What I learned building this
 
