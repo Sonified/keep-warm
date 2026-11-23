@@ -24,6 +24,7 @@ const BACK = '𝗯𝗮𝗰𝗸 𝗯𝘂𝗿𝗻𝗲𝗿' // "back burner": keep-
 const BACK_KEY = 'back' // what closedFor holds when the back-burner line is hidden
 const COMMAND = 'warm-line'
 const LOOK_EVERY_MS = 30_000
+const SIZE_EVERY_MS = 3_000 // while a turn runs: each request in it reports the thread's new size as its reply starts
 const PING = 'keep-warm ping: reply with the single word "ok" and do nothing else. No tool calls.'
 const ON_WORDS = ['warm', 'keep warm', 'keepwarm', 'keep-warm', 'warm on', 'keep warm on']
 const OFF_WORDS = ['cold', 'cool', 'stop warm', 'warm off', 'keep warm off', 'stop keeping warm']
@@ -100,7 +101,8 @@ const look = async ($: EngineInterface, mayPing: boolean): Promise<void> => {
   if (word === 'ping') void $.prompt.submit({ text: PING }).catch(() => undefined)
 }
 
-// The size for the back-burner line. Only a request changes it, so this runs at the start and after each turn.
+// The thread's size for the line. Only a request changes it, so this runs at the start, every few seconds while a
+// turn runs, and after each turn.
 const measure = async ($: EngineInterface): Promise<void> => {
   const tokens = await ctl($, 'size')
   if (/^\d+$/.test(tokens)) size = sized(tokens)
@@ -121,6 +123,11 @@ export const register: Register = on => {
     })
     void lookAndMeasure($)
     $.clock.every(LOOK_EVERY_MS, () => void look($, !isBusy))
+    // While a turn runs the size is read every few seconds, so the line follows the thread as it grows (a turn of
+    // many tool calls is many requests) instead of jumping once at the end. Reading it sends nothing.
+    $.clock.every(SIZE_EVERY_MS, () => {
+      if (isBusy) void measure($)
+    })
 
     return next(e)
   })
