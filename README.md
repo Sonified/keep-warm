@@ -41,7 +41,7 @@ What one prompt costs after an hour away, on Fable 5.2:
 Those costs are for a single cold-cache read. Imagine how many times this happens in a day. For example: let's say
 your context window is over 600k and you walk away 9 times. You just threw away a copy of GTA VI.
 
-## What you type
+## The commands
 
 None of these reach Claude, so they're free. Talk to the plugin all you want.
 
