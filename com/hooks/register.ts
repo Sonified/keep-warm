@@ -15,17 +15,24 @@ const LOOK_EVERY_MS = 15_000
 const PICKUP_MS = 90_000
 const NOT_SENT = '(this message was not sent to Claude)'
 
-// Runs /compact in this window, outside any hook the turn waits on; the engine queues it until the session is idle.
+// Compacts this window now, the same call /compact makes. Not $.command.run: that one queues the command, and the
+// queue only drains when the next message is sent, so the compact waited for it. $.session.compact rejects while a
+// turn runs, so a refusal is tried again each second for up to RETRIES seconds.
+const RETRIES = 30
 const compactHere = ($: EngineInterface, args: string): void => {
-  $.clock.after(0, () => {
-    void $.command.run({ command: 'compact', args }).catch(async () => {
-      try {
-        await $.session.compact(args ? { instructions: args } : undefined)
-      } catch (err) {
-        $.ui.toast(`com: compact did not run (${String(err)})`)
-      }
-    })
-  })
+  let tries = 0
+  const attempt = (): void => {
+    $.session
+      .compact(args ? { instructions: args } : undefined)
+      .then(result => {
+        if ('skip' in result && result.skip) $.ui.toast(`com: compact skipped (${String(result.skip)})`)
+      })
+      .catch(err => {
+        if (++tries < RETRIES) $.clock.after(1_000, attempt)
+        else $.ui.toast(`com: compact did not run (${String(err)})`)
+      })
+  }
+  $.clock.after(250, attempt) // after the hook that dropped "com" has returned
 }
 
 const home = async ($: EngineInterface): Promise<string> => (await $.env.get('HOME')) ?? ''
