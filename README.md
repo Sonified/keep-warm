@@ -24,17 +24,17 @@ Fable 5.2 (40 times on Opus 5.5). The bigger the thread, the more a cold return 
 A cold read (the cache has lapsed, so the whole thread gets written again) costs $16 per million tokens on Fable
 5.2 and $8 per million on Opus 5.5:
 
-| Context | Fable 5.2 cold | Opus 5.5 cold | Warm read (either) | Savings (Fable / Opus) | Keep-warm w/ Fable buys you |
-| --- | --- | --- | --- | --- | --- |
-| 🟢 200k | $3.20 | $1.60 | $0.04 | $3.16 / $1.56 | a coffee |
-| 🟢 300k | $4.80 | $2.40 | $0.06 | $4.74 / $2.34 | a croissant |
-| 🟡 400k | $6.40 | $3.20 | $0.08 | $6.32 / $3.12 | a latte |
-| 🟠 500k | $8.00 | $4.00 | $0.10 | $7.90 / $3.90 | a sandwich |
-| 🔴 600k | $9.60 | $4.80 | $0.12 | $9.48 / $4.68 | a smoothie |
-| 🔴 700k | $11.20 | $5.60 | $0.14 | $11.06 / $5.46 | a burrito |
-| 🔴 800k | $12.80 | $6.40 | $0.16 | $12.64 / $6.24 | a burger |
-| 🔴 900k | $14.40 | $7.20 | $0.18 | $14.22 / $7.02 | a cocktail |
-| 🔴 1M | $16.00 | $8.00 | $0.20 | $15.80 / $7.80 | a movie ticket |
+| Context | Warm<br>read | Fable 5.2<br>cold → **saved** | Opus 5.5<br>cold → **saved** | Keep-warm w/ Fable<br>buys you |
+| --- | --- | --- | --- | --- |
+| 🟢 200k | $0.04 | $3.20 → **$3.16** | $1.60 → **$1.56** | a coffee |
+| 🟢 300k | $0.06 | $4.80 → **$4.74** | $2.40 → **$2.34** | a croissant |
+| 🟡 400k | $0.08 | $6.40 → **$6.32** | $3.20 → **$3.12** | a latte |
+| 🟠 500k | $0.10 | $8.00 → **$7.90** | $4.00 → **$3.90** | a sandwich |
+| 🔴 600k | $0.12 | $9.60 → **$9.48** | $4.80 → **$4.68** | a smoothie |
+| 🔴 700k | $0.14 | $11.20 → **$11.06** | $5.60 → **$5.46** | a burrito |
+| 🔴 800k | $0.16 | $12.80 → **$12.64** | $6.40 → **$6.24** | a burger |
+| 🔴 900k | $0.18 | $14.40 → **$14.22** | $7.20 → **$7.02** | a cocktail |
+| 🔴 1M | $0.20 | $16.00 → **$15.80** | $8.00 → **$7.80** | a movie ticket |
 
 Those costs are for a single cold-cache read. Imagine how many times this happens in a day. Or better yet,
 don't... just use the plugin 🤓
