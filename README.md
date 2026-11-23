@@ -80,7 +80,7 @@ The dot shows when it's worth compacting:
 
 ## Install
 
-**The easy way: ask Claude.** Paste this into Claude Code:
+**The easy way:** Paste this into Claude Code:
 
 > Install the keep-warm plugins from https://github.com/Sonified/keep-warm
 
