@@ -1,8 +1,10 @@
 ![keep-warm: a Claude Code plugin that saves you money](images/social-preview.png)
 
-# keep-warm 🔥
+## How it works
 
-A Claude Code plugin that saves you money by keeping your threads warm while you step away.
+Type `warm` in any thread, then step away. keep-warm sends one tiny "ok" after 50 quiet minutes. Claude says ok.
+The cache stays warm. It costs a few cents instead of a few dollars. That turn is a warm read, and it restarts the
+hour.
 
 ![The keep-warm bar above the input box](images/bar.png)
 
@@ -32,9 +34,6 @@ A cold read (the cache has lapsed, so the whole thread gets written again) costs
 
 Those costs are for a single cold-cache read. Imagine how many times this happens in a day. Or better yet,
 don't... just use the plugin 🤓
-
-keep-warm sends one tiny "ok" after 50 quiet minutes. Claude says ok. The cache stays warm. It costs a few cents instead of a
-few dollars. That turn is a warm read, and it restarts the hour.
 
 > You work in Fable 5.2, walk away for an hour, and come back with a 400k context. A few hours later you do the
 > same at 500k, then again at 600k. Then you switch from Fable to Opus without compacting. That costs $28.80. With
