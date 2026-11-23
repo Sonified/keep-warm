@@ -50,8 +50,6 @@ None of these reach Claude, so they're free. Talk to the plugin all you want.
 | `cold` or `cool` | keep-warm off for this thread |
 | `warm list` | every warm thread, in any window: model, size, idle time, project, name, and money saved so far |
 | `cool 2` or `cool 2 4` | switch off those threads from the last list |
-| `com` | runs the real `/compact` on this thread (`com keep the plan` passes focus instructions) |
-| `com 2` or `com 2 4` | compacts those threads from the last list, each in its own window |
 | `tokens` | one line: size, cost to re-read, cost if the cache lapses, minutes left on the cache |
 | `/warm-line` | hide or show the bar |
 
@@ -87,7 +85,6 @@ In Claude Code:
 /plugin marketplace add Sonified/keep-warm
 /plugin install keep-warm@keep-warm
 /plugin install tokens@keep-warm
-/plugin install com@keep-warm
 ```
 
 Then `/reload-plugins`. Needs `bash` and `python3`. Built and used on macOS in the VS Code extension. Prices are
