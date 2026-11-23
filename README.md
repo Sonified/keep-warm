@@ -26,8 +26,8 @@ A cold read (the cache has lapsed, so the whole thread gets written again) costs
 
 What one return costs after an hour away, on Fable 5.2:
 
-| Context | Without keep-warm | With keep-warm | You save | That buys you |
-| --- | --- | --- | --- | --- |
+| Context | Disabled | 🔥 Enabled | You save | That buys you |
+| --- | :---: | :---: | :---: | --- |
 | 🟢 200k | $3.20 | $0.04 | **$3.16** | a coffee |
 | 🟢 300k | $4.80 | $0.06 | **$4.74** | a croissant |
 | 🟡 400k | $6.40 | $0.08 | **$6.32** | a latte |
@@ -38,7 +38,7 @@ What one return costs after an hour away, on Fable 5.2:
 | 🔴 900k | $14.40 | $0.18 | **$14.22** | a cocktail |
 | 🔴 1M | $16.00 | $0.20 | **$15.80** | a movie ticket |
 
-On Opus 5.5, the "without" column is half of this, and the "with" column is the same.
+On Opus 5.5, the "Disabled" column is half of this, and the "Enabled" column is the same.
 
 Those costs are for a single cold-cache read. Imagine how many times this happens in a day. Or better yet,
 don't... just use the plugin 🤓
