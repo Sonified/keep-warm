@@ -22,7 +22,7 @@ which is cheap. Come back later and the whole thread is written into the cache a
 Fable 5.2 (40 times on Opus 5.5). The bigger the thread, the more a cold return costs.
 
 A cold read (the cache has lapsed, so the whole thread gets written again) costs $16 per million tokens on Fable
-5.2 and $8 per million on Opus 5.5:
+5.2 and $8 per million on Opus 5.5.
 
 What one return costs after an hour away, on Fable 5.2:
 
