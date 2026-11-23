@@ -38,14 +38,9 @@ What one prompt costs after an hour away, on Fable 5.2:
 | 🔴 900k | $14.40 | $0.18 | **$14.22** | a cocktail |
 | 🔴 1M | $16.00 | $0.20 | **$15.80** | a movie ticket |
 
-Those costs are for a single cold-cache read. Imagine how many times this happens in a day. Or better yet,
-don't... just use the plugin 🤓
-
-So let's say you work in Fable 5.2, walk away for an hour, and come back with a 400k context. A few hours later
-you do the same at 500k, then again at 600k. Then you switch from Fable to Opus without compacting. That costs
-$28.80. With keep-warm, and compacting before switching from Fable to Opus, it costs $2.70.
-
-$26 back in your pocket. Same work.
+Those costs are for a single cold-cache read. Imagine how many times this happens in a day. For example: let's say
+your context window is over 600k and you walk away 9 times. You just threw away enough $$ to buy GTA VI. Or better
+yet, don't... just use the plugin 🤓
 
 ## What you type
 
