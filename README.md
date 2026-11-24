@@ -139,6 +139,9 @@ MAX=86400
 Changes take effect within 30 seconds. Keep `IDLE` under 3600: the cache lasts an hour, so a later ping arrives
 after it has already gone cold.
 
+*An independent project, not affiliated with or endorsed by Anthropic. keep-warm's functionality is achieved
+exclusively through Claude Code's official plugin system.*
+
 ---
 
 ***Winter is coming ❄️⛄️ keep warm 🔥***
